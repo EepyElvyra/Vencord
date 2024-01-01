@@ -19,12 +19,17 @@ export const settings = definePluginSettings({
         description: "Remove the limit on Super Reactions playing at once",
         default: false,
     },
+    preventSuperReactionPlaying: {
+        type: OptionType.BOOLEAN,
+        description: "Prevent all Super Reactions from playing",
+        default: false,
+    },
 
     superReactionPlayingLimit: {
         description: "Max Super Reactions to play at once",
         type: OptionType.SLIDER,
         default: 20,
-        markers: [0, 5, 10, 20, 40, 60, 80, 100],
+        markers: [5, 10, 20, 40, 60, 80, 100],
         stickToMarkers: true,
     },
 }, {
@@ -56,6 +61,7 @@ export default definePlugin({
     settings,
 
     shouldPlayBurstReaction(playingCount: number) {
+        if (settings.store.preventSuperReactionPlaying) return false;
         if (settings.store.unlimitedSuperReactionPlaying) return true;
         return playingCount < settings.store.superReactionPlayingLimit;
     }
