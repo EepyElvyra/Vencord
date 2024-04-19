@@ -12,7 +12,7 @@ import { findByPropsLazy } from "@webpack";
 import { React, RelationshipStore } from "@webpack/common";
 
 const { Heading, Text } = findByPropsLazy("Heading", "Text");
-const container = findByPropsLazy("memberSinceContainer");
+const wrapper = findByPropsLazy("memberSinceWrapper");
 const { getCreatedAtDate } = findByPropsLazy("getCreatedAtDate");
 const clydeMoreInfo = findByPropsLazy("clydeMoreInfo");
 const locale = findByPropsLazy("getLocale");
@@ -49,7 +49,7 @@ export default definePlugin({
                     Friends Since
                 </Heading>
 
-                <div className={container.memberSinceContainer}>
+                <div className={wrapper.memberSince}>
                     {!!getCurrentChannel()?.guild_id && (
                         <svg
                             aria-hidden="true"
